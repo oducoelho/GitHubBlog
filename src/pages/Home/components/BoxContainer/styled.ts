@@ -1,19 +1,20 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const Container = styled(Link)`  
+export const Container = styled.div`  
   display: grid;
   gap: 1.7rem;
   grid-template-columns: repeat(2, 1fr);
-  text-decoration: none;
-`
-export const Box = styled.div`
+  padding-bottom: 10rem;
+  `
+export const Box = styled(Link)`
   margin-top: 48px;
   margin-bottom: -48px;
   width: 416px;
   height: 260px;
   background-color: ${props => props.theme["base-post"]};
   border-radius: 6px;
+  text-decoration: none;
 `
 export const Content = styled.div`
   font-family: 'Nunito', sans-serif;

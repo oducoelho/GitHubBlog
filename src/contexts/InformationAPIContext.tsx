@@ -1,5 +1,4 @@
 import { createContext, ReactNode, useCallback, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { api } from "../lib/axios";
 
 interface InformationAPI {
@@ -8,17 +7,10 @@ interface InformationAPI {
   login: string;
   company: string;
   followers: string;
+  avatar_url: string;
 }
 
 interface issuesAPI {
-  title: string;
-  body: string;
-  created_at: string;
-  number: number;
-  html_url: string;
-  comments: number;
-}
-interface issuesDetailsAPI {
   title: string;
   body: string;
   created_at: string;
@@ -30,7 +22,6 @@ interface issuesDetailsAPI {
 interface InformationAPIContextType {
   informations: InformationAPI[]
   issues: issuesAPI[]
-  issuesDetails: issuesDetailsAPI[]
   getPost: (query?: string) => Promise<void>
 }
 
@@ -43,7 +34,6 @@ export const InformationAPIContext = createContext({} as InformationAPIContextTy
 export const InformationsProvaider = ({ children }:InformationsProvaiderProps) => {
   const [informations, setInformations] = useState<InformationAPI[]>([]) 
   const [issues, setIssues] = useState<issuesAPI[]>([])
-  const [issuesDetails, setIssuesDetails] = useState<issuesDetailsAPI[]>([])
 
 
   const loadInformations = async () => {
@@ -67,27 +57,13 @@ export const InformationsProvaider = ({ children }:InformationsProvaiderProps) =
     finally {}
   }, [issues]);
 
-  const { id } = useParams()
-
-  const getPostDetails = useCallback(async () => {
-    try {
-      const response = await api.get(
-        `/repos/oducoelho/GitHubBlog/issues/${id}`
-      );
-
-      setIssuesDetails(response.data);
-    }
-    finally{}
-  }, [issuesDetails])
-
   useEffect(() => {
     loadInformations()
     getPost()
-    getPostDetails()
   }, [])
 
   return (
-    <InformationAPIContext.Provider value={{ informations, issues, getPost, issuesDetails }}>
+    <InformationAPIContext.Provider value={{ informations, issues, getPost }}>
       {children}
     </InformationAPIContext.Provider>
   )

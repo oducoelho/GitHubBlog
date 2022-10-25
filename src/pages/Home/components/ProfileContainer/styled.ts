@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { preprocess } from "zod"
 
 export const PorfileContainer = styled.div`
   background-color: ${props => props.theme["base-profile"]};
@@ -21,6 +22,12 @@ export const Data = styled.div`
   justify-content: space-around;
   h1 {
     color: ${props => props.theme["base-title"]};
+    a {
+      text-decoration: none;
+      padding-left: 17rem;
+      font-size: 12px;
+      color: ${props => props.theme.blue};
+    }
   }
   h3 {
     color: ${props => props.theme["base-text"]};

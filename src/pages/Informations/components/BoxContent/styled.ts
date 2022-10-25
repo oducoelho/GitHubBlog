@@ -10,7 +10,6 @@ export const HomeContainer = styled.div`
 export const BoxContent = styled.div`
   background-color: ${props => props.theme["base-profile"]};
   width: 864px;
-  height: 212px;
   border-radius: 6px;
   padding: 2rem 2.5rem;
   display: flex;
